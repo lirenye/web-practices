@@ -1,0 +1,32 @@
+/* 
+  --webkit内核
+  ::-webkit-scrollbar 整个滚动条
+  ::-webkit-scrollbar-track 滚动条的滚动区域(轨道)
+  ::-webkit-scrollbar-thumb 滚动条的可拖拽部分(滑块)
+  ::-webkit-scrollbar-button 滚动条两端的按钮
+  ::-webkit-scrollbar-track-piece 滚动条轨道未被滑盖覆盖的部分
+  ::-webkit-scrollbar-corner 垂直和水平滚动条的相交部分
+
+  --firefox browser
+  scrollbar-width 控制滚动条的宽度 auto/thin
+  scrollbar-color 接受两个颜色，依次指定滑块和轨道的颜色
+ */
+
+/* html::-webkit-scrollbar-track-piece {
+  background: yellow;
+} */
+
+html::-webkit-scrollbar {
+  /* background-color: blue; */
+  /* height: 100%; */
+  width: 8px;
+}
+
+html::-webkit-scrollbar-track {
+  background: #000;
+}
+
+html::-webkit-scrollbar-thumb {
+  background: #4e4e4e;
+  border-radius: 20px;
+}
