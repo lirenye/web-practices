@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import LoginView from '../views/LoginView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -7,7 +7,12 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView
+      component: ()=> import('@/views/HomeView.vue')
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: LoginView
     },
     {
       path: '/about',
@@ -18,6 +23,19 @@ const router = createRouter({
       component: () => import('../views/AboutView.vue')
     }
   ]
+})
+
+router.beforeEach((to, from)=>{
+  const access_token = localStorage.getItem('access_token')
+  const refresh_token = localStorage.getItem('refresh_token')
+
+  if(to.path === '/login'){
+    if(access_token && refresh_token) return {path: '/'}
+    else return true;
+  }else {
+    if(access_token && refresh_token) return true
+    else return {path: '/login'}
+  }
 })
 
 export default router

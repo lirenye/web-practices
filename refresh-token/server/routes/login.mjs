@@ -1,23 +1,27 @@
 import express from 'express'
+import { secret } from '../config/index.mjs';
+
+
+const loginRouter = express.Router()
 import jwt from 'jsonwebtoken';
-import { LowSync} from 'lowdb'
-import { JSONFileSync} from 'lowdb/node'
-import { fileURLToPath} from 'node:url'
-import { join, dirname} from 'node:path'
+const payload = {username: 'lirenye'}
 
 
-const loginRouter = express.Router();
-// 数据库文件文件路径
-const file = join(dirname(fileURLToPath(import.meta.url)), '../../db_data/db.json')
-// 数据库实例
-const db = new LowSync(new JSONFileSync(file));
-// 读取文件数据
-db.read()
 
-
-loginRouter.get('/', (req, res)=>{
-  res.send('login API OK')
+loginRouter.post('/', (req, res)=>{
+  const accessToken = jwt.sign(payload, secret, {expiresIn: "3s"})
+  const refreshToken = jwt.sign(payload, secret, {expiresIn: '6s'})
+  res.send({status: 200, msg: 'Login OK', data: {
+    accessToken,
+    refreshToken
+  }})
 })
+
+loginRouter.post('/verify_token',(req, res)=>{
+  res.send('token OK')
+})
+
+
 
 
 export default loginRouter;
