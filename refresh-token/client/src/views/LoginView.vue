@@ -17,6 +17,7 @@ async function toLogin(){
 <template>
   <div>
     <h1>Login Component</h1>
+    <h2>请打开控制台观察输出信息</h2>
     <button @click="toLogin">Login</button>
   </div>
 </template>

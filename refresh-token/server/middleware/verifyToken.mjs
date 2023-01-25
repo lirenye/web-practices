@@ -1,7 +1,7 @@
 import { secret } from "../config/index.mjs";
 import jwt from 'jsonwebtoken'
 
-const allow = ['/login']
+const allow = ['/login', '/login/refresh_token']
 
 /**
  * @description 验证token middleware
@@ -10,6 +10,7 @@ const allow = ['/login']
  * @param {NextFunction} next 
  */
 export default function validToken(req, res, next){
+  // console.log(req.path)
   try {
     const uri = req.path;
     const token = req.headers.authorization;
